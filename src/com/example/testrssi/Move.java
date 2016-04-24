@@ -55,7 +55,7 @@ public class Move extends Activity {
 			public void onClick(View v) {
 				// 注意每次需new一个实例,新建的任务只能执行一次,否则会出现异常
 				X[count]=Integer.parseInt(locationX.getText().toString());
-				Y[count]=Integer.parseInt(locationY.getText().toString());
+				Y[count]=Integer.parseInt(locationY.getText().toString());//input the X Y location
 				mTask = new RssiTask();
 				mTask.execute();
 
@@ -74,18 +74,18 @@ public class Move extends Activity {
 		@Override
 		protected String doInBackground(String... params) {
 			// TODO Auto-generated method stub
-		for(int i=0;i<10;i++){
+		for(int i=0;i<10;i++){// get rssi value for 10 times
 			wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);  
 			list = wifiManager.getScanResults(); 
 			for(int j=0;j<list.size();j++){
 				if(list.get(j).BSSID.equals(result)){
 					rssi_tmp[i]=list.get(j).level;
-					System.out.printf("get value");
+					//System.out.printf("get value");
 					break;
 				}
 			}
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(1000);//pause for 1 sec
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -101,15 +101,15 @@ public class Move extends Activity {
 			count++;
 		if(count == 3){
 			for(int i=0;i<3;i++){
-				r_min[i]=(float) Math.pow(10,-(rssi[i]+10)/35);
-				r_max[i]=(float) Math.pow(10,-(rssi[i]-30)/50);
+				r_min[i]=(float) Math.pow(10,-(rssi[i]+10)/35);//caculate min r
+				r_max[i]=(float) Math.pow(10,-(rssi[i]-30)/50);//caculate max r
 			}
 			Intent in = new Intent(Move.this, DrawMapViewActivity.class);
         	in.putExtra("r_min", r_min);
         	in.putExtra("r_max", r_max);
         	in.putExtra("X", X); 
         	in.putExtra("Y", Y); 
-			startActivity(in);
+			startActivity(in);//draw map
 		}
 		
 			return null;

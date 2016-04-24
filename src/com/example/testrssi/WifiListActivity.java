@@ -55,7 +55,7 @@ public class WifiListActivity extends Activity {
                 	 ScanResult scanResult = list.get(arg2);
                 	 Toast.makeText(WifiListActivity.this, scanResult.BSSID, Toast.LENGTH_LONG).show();
                 	Intent in = new Intent(WifiListActivity.this, Move.class);
-                	in.putExtra("result",scanResult.BSSID); 
+                	in.putExtra("result",scanResult.BSSID); //get rssi for 3 times
         			startActivity(in);
                 }
 

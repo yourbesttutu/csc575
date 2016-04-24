@@ -72,7 +72,7 @@ public class ListAP_location extends Activity {
 				int j = 0;
 				for (int i = 0; i < isSelected.size(); i++) {
 					if (isSelected.get(i) == true) {
-						MAC[j] = list.get(i).BSSID;
+						MAC[j] = list.get(i).BSSID;//get MAC addr
 						j++;
 					}
 				}
@@ -192,7 +192,7 @@ public class ListAP_location extends Activity {
 				wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 				list = wifiManager.getScanResults();
 
-				for (int j = 0; j < list.size(); j++) {
+				for (int j = 0; j < list.size(); j++) {//get rssi for each MAC addr
 					if (list.get(j).BSSID.equals(MAC[0])) {
 						rssi_tmp[0][i] = list.get(j).level;
 
@@ -209,7 +209,7 @@ public class ListAP_location extends Activity {
 					}
 				}
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(1000);//pause for 1 sec
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -226,11 +226,11 @@ public class ListAP_location extends Activity {
 			}
 			rssi[0] = tmp1 / 10;
 			rssi[1] = tmp2 / 10;
-			rssi[2] = tmp3 / 10;
+			rssi[2] = tmp3 / 10;//get average value for each rssi
 
 				for (int i = 0; i < 3; i++) {
-					r_min[i] = (float) Math.pow(10, -(rssi[i] + 10) / 35);
-					r_max[i] = (float) Math.pow(10, -(rssi[i] - 30) / 50);
+					r_min[i] = (float) Math.pow(10, -(rssi[i] + 10) / 35);//caculate min r
+					r_max[i] = (float) Math.pow(10, -(rssi[i] - 30) / 50);//caculate max r
 					if(MAC[i].equals("24:de:c6:e1:29:61")){
 						X[i]=35;
 						Y[i]=7;
@@ -249,7 +249,7 @@ public class ListAP_location extends Activity {
 				in.putExtra("r_max", r_max);
 				in.putExtra("X", X);
 				in.putExtra("Y", Y);
-				startActivity(in);
+				startActivity(in);//draw map
 			
 
 			return null;
